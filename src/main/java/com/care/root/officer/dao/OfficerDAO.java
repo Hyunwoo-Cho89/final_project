@@ -62,4 +62,10 @@ public interface OfficerDAO {
 	public int getApplicationCred(@Param("idNum") String idNum, @Param("year") String year, @Param("semester") String semester);
 	public int getReceivedCred(@Param("idNum") String idNum, @Param("year") String year, @Param("semester") String semester);
 	public int tuition(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	public ArrayList<String> getInputPeriod();
+	public ArrayList<String> getChkPeriod();
+	public int setInputPeriod(String yn);
+	public int setChkPeriod(String yn);
+	public String aveGradeCal(@Param("idNum") String idNum, @Param("dbSemester") String dbSemester, @Param("dbYear") String dbYear);
+	public void insertAveGrade(@Param("aveGrade") String aveGrade, @Param("idNum") String idNum, @Param("dbSemester") String dbSemester);
 }	

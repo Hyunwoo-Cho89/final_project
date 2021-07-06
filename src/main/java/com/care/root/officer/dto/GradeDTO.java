@@ -13,7 +13,21 @@ public class GradeDTO {
 	private int applicationCred;
 	private int gradeSemester;
 	private String year;
+	private String semester;
+	private String numGrade;
 	
+	public String getSemester() {
+		return semester;
+	}
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+	public String getNumGrade() {
+		return numGrade;
+	}
+	public void setNumGrade(String numGrade) {
+		this.numGrade = numGrade;
+	}
 	public String getMajor() {
 		return major;
 	}

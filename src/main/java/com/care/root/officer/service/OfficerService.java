@@ -35,4 +35,5 @@ public interface OfficerService {
 	public Map<String,Object> searchMajorGrade(String searchS, String searchT, String searchM, int num);
 	public int finalProcess();
 	public int tuition(HttpServletRequest request);
+	public int setGrade(Model model);
 }

@@ -57,7 +57,7 @@
 	<div class="menuBar">
 	</div>
 	<div class="container">
-		<div style = "padding-top: 50px; margin-bottom: 30px;">
+		<div style = "padding-top: 50px; margin-bottom: 30px; display:flex; ">
 			<h4>납부기한 설정</h4>
 		</div>
 		<form action = "tuition" method = "post">

@@ -404,6 +404,7 @@ public class OfficerServiceImpl implements OfficerService{
 		}
 		
 		insertCurTotalGrade();
+		insertAveGrade();
 		
 		mapper.insertCurRank();
 		
@@ -596,7 +597,22 @@ public class OfficerServiceImpl implements OfficerService{
 			dto.setTotalScore(set.get(i).getCurTotalGrade());
 			dto.setIdNum(set.get(i).getIdNum());
 			dto.setYear(year);
-			dto.setSemester(set.get(i).getSemester());
+			if(set.get(i).getGrade() == 1 && set.get(i).getSemester().equals("1")) {
+				dto.setGradeSemester(1);
+				dto.setMjSemester(101);
+			}
+			else if(set.get(i).getGrade() == 1 && set.get(i).getSemester().equals("2")) {
+				dto.setGradeSemester(2);
+				dto.setMjSemester(102);
+			}
+			else if(set.get(i).getGrade() == 2 && set.get(i).getSemester().equals("1")) {
+				dto.setGradeSemester(3);
+				dto.setMjSemester(201);
+			}
+			else {
+				dto.setGradeSemester(4);
+				dto.setMjSemester(202);
+			}
 			dto.setApplicationCred(mapper.getApplicationCred(set.get(i).getIdNum(), year, set.get(i).getSemester()));
 			dto.setReceivedCred(mapper.getApplicationCred(set.get(i).getIdNum(), year, set.get(i).getSemester()));
 			mapper.finalProcess(dto);
@@ -616,5 +632,58 @@ public class OfficerServiceImpl implements OfficerService{
 		String endDate = request.getParameter("endDate");
 		
 		return mapper.tuition(startDate, endDate);
+	}
+	
+	@Override
+	public int setGrade(Model model){
+		String getInputPeriod = mapper.getInputPeriod().get(0);
+		String getChkPeriod = mapper.getChkPeriod().get(0);
+		
+		if (getInputPeriod.equals("N") && getChkPeriod.equals("N")) {
+			mapper.setInputPeriod("Y");
+			mapper.setChkPeriod("Y");
+			model.addAttribute("result", "Y");
+			return mapper.setInputPeriod("Y");
+		}
+		else if (getInputPeriod.equals("Y") && getChkPeriod.equals("Y")){
+			mapper.setInputPeriod("N");
+			mapper.setChkPeriod("N");
+			model.addAttribute("result", "N");
+			return mapper.setInputPeriod("N");
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	public void insertAveGrade() {
+		ArrayList<String> list = new ArrayList<String>();
+		list = mapper.studentIdNum();
+		String aveGrade;
+		
+		Calendar cal = Calendar.getInstance();
+		
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH)+1;
+		String dbSemester = null;
+		String dbYear = year + "";
+		
+		if(month < 9 && month > 0) {
+			dbSemester = "1";
+		}
+		else if (month >= 9 && month < 13 ){
+			dbSemester = "2";
+		}
+		
+		for(int i = 0; i<list.size(); i++) {
+			aveGrade = mapper.aveGradeCal(list.get(i), dbSemester, dbYear);
+			if(aveGrade == null) {
+				aveGrade = "0";
+				mapper.insertAveGrade(aveGrade, list.get(i), dbSemester);
+			}
+			else {
+				mapper.insertAveGrade(aveGrade, list.get(i), dbSemester);
+			}
+		}
 	}
 }

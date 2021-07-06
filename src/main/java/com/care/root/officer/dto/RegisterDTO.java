@@ -14,7 +14,14 @@ public class RegisterDTO {
 	private String semester;
 	private int aveGrade;
 	private int totalScore;
+	private int mjSemester;
 	
+	public int getMjSemester() {
+		return mjSemester;
+	}
+	public void setMjSemester(int mjSemester) {
+		this.mjSemester = mjSemester;
+	}
 	public String getMajor() {
 		return major;
 	}

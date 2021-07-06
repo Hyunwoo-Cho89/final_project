@@ -325,6 +325,8 @@
 				onclick="findOperation($('#firstNum').val())" value="경영학과">경영학과</button>
 			<button type="button" class="btn btn-secondary" id="finalProcess"
 				onclick="location.href = 'finalProcess'" value="처리">최종 성적/장학 처리</button>
+			<button type="button" class="btn btn-secondary" id="setGrade"
+				onclick="location.href = 'setGrade'" value="처리">성적정정기간 설정 / 해제</button>
 		</div>
 		<select id="searchSelect">
 			<option value="name">이름</option>

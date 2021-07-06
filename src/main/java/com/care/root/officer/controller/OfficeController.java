@@ -223,4 +223,13 @@ public class OfficeController implements MemberSessionName{
 		}
 	}
 	
+	@RequestMapping("setGrade")
+	public String setGrade(Model model) {
+		if(os.setGrade(model) != 0) {
+			return "admin/setGradeSuccess";
+		}
+		else {
+			return "admin/setGradeFail";
+		}
+	}
 }

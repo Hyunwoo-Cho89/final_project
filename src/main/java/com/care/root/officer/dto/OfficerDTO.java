@@ -26,8 +26,16 @@ public class OfficerDTO {
 	private String semester;
 	private int curTotalGrade;
 	private int curRank;
+	private String inputPeriod;
+	private String aveGrade;
 	
 	
+	public String getAveGrade() {
+		return aveGrade;
+	}
+	public void setAveGrade(String aveGrade) {
+		this.aveGrade = aveGrade;
+	}
 	public String getSemester() {
 		return semester;
 	}
@@ -178,5 +186,12 @@ public class OfficerDTO {
 	public void setAccountNum(String accountNum) {
 		this.accountNum = accountNum;
 	}
+	public String getInputPeriod() {
+		return inputPeriod;
+	}
+	public void setInputPeriod(String inputPeriod) {
+		this.inputPeriod = inputPeriod;
+	}
+	
 	
 }

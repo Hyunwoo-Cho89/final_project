@@ -29,6 +29,8 @@
 		<result property="semester" column="semester" />
 		<result property="curTotalGrade" column="cur_totalgrade" />
 		<result property="curRank" column="cur_rank" />
+		<result property="inputPeriod" column="input_period" />
+		<result property="aveGrade" column="ave_grade" />
 	</resultMap>
 
 	<resultMap type="com.care.root.officer.dto.TimeTableDTO"
@@ -55,6 +57,8 @@
 		<result property="applicationCred" column="application_cred" />
 		<result property="gradeSemester" column="grade_semester" />
 		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="numGrade" column="num_grade" />
 	</resultMap>
 	
 	<resultMap type="com.care.root.officer.dto.RegisterDTO" id="register">
@@ -71,6 +75,7 @@
 		<result property="semester" column="semester" />
 		<result property="aveGrade" column="ave_grade" />
 		<result property="totalScore" column="total_score" />
+		<result property="mjSemester" column="mj_semester" />
 	</resultMap>
 	
 	<select id="staffInfo" resultMap="officer">
@@ -303,5 +308,29 @@
 	
 	<update id="tuition">
 		update tuition set reg_start = #{startDate}, reg_end = #{endDate}
+	</update>
+	
+	<select id = "getInputPeriod" resultType="String">
+		select input_period from member_info where position = '학생'
+	</select>
+	
+	<update id = "setInputPeriod">
+		update member_info set input_period = #{yn} where position = '학생'
+	</update>
+	
+	<select id = "getChkPeriod" resultType="String">
+		select chk_period from register_info
+	</select>
+	
+	<update id = "setChkPeriod">
+		update register_info set chk_period = #{yn}
+	</update>
+	
+	<select id="aveGradeCal" resultType="String">
+		select sum(num_grade)/4 from grade_info where id_num = #{idNum} and year = #{dbYear} and semester = #{dbSemester}
+	</select>
+	
+	<update id="insertAveGrade">
+		update member_info set ave_grade = #{aveGrade} where id_num = #{idNum} and semester = #{dbSemester}
 	</update>
 </mapper>
